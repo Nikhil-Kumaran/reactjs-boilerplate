@@ -1,0 +1,74 @@
+{
+  "name": "reactjs-boilerplate",
+  "version": "1.0.9",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nikhil-Kumaran/react-boilerplate/"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint",
+      "pretty-quick --staged",
+      "git add"
+    ]
+  },
+  "bin": {
+    "reactjs-boilerplate": "./bin/start.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "start": "webpack-dev-server --port 8080 --open --hot --mode development --display-error-details",
+    "clean-build": "rm -rf build",
+    "build": "npm run clean-build && webpack --mode production",
+    "build-serve": "npm run build && serve"
+  },
+  "keywords": [],
+  "author": "Nikhil Kumaran S",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.2.2",
+    "eslint-config-google": "^0.13.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.14.3",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.4",
+    "less": "^3.10.1",
+    "less-loader": "^5.0.0",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "serve": "^11.1.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.2",
+    "webpack-bundle-analyzer": "^3.5.0",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
+  }
+}
