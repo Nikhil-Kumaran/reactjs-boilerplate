@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/Nikhil-Kumaran/reactjs-boilerplate/"
   },
+  "homepage": "https://reactjs-boilerplate.netlify.com/",
   "babel": {
     "presets": [
       "@babel/preset-env",
