@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nikhil-Kumaran/react-boilerplate/"
+    "url": "https://github.com/Nikhil-Kumaran/reactjs-boilerplate/"
   },
   "babel": {
     "presets": [
