@@ -1,27 +1,24 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const path = require('path')
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const path = require("path");
+const { jsonBeautify } = require("beautify-json");
+
 let config = {
-  entry: [
-    './src/index.js'
-  ],
+  entry: ["./src/index.js"],
   output: {
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "build"),
+    publicPath: "/",
+    filename: "bundle.js",
   },
   devServer: {
-    contentBase: './build',
-    historyApiFallback: true //For react router
+    contentBase: "./build",
+    historyApiFallback: true, //For react router
   },
   resolve: {
-    modules: [
-      path.join(__dirname, "src"),
-      "node_modules"
-    ],
+    modules: [path.join(__dirname, "src"), "node_modules"],
     alias: {
-      'react': path.join(__dirname, 'node_modules', 'react')
-    }
+      react: path.join(__dirname, "node_modules", "react"),
+    },
   },
   module: {
     rules: [
@@ -29,63 +26,69 @@ let config = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
-          }
-        ]
+            loader: "html-loader",
+          },
+        ],
       },
       {
         test: /\.css$/,
-        use: [ 
+        use: [
           {
-            loader: 'style-loader'
+            loader: "style-loader",
           },
-          {  
-            loader: 'css-loader'
-          }
-        ]
+          {
+            loader: "css-loader",
+          },
+        ],
       },
       {
         test: /\.less$/,
-        use: [ 
+        use: [
           {
-            loader: 'style-loader'
+            loader: "style-loader",
           },
-          {  
-            loader: 'css-loader'
+          {
+            loader: "css-loader",
           },
-          {  
-            loader: 'less-loader'
-          }
-        ]
-      }
-    ]
+          {
+            loader: "less-loader",
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./index.html"
+      template: "./index.html",
     }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static'
-    })
-  ]
+  ],
 };
 
 module.exports = (env, argv) => {
-
-  if (argv.mode === 'development') {
-    config.devtool = 'inline-source-map';
+  if (argv.mode === "development") {
+    config.devtool = "inline-source-map";
+    config.resolve.alias["react-dom"] = "@hot-loader/react-dom";
   }
 
-  if (argv.mode === 'production') {
-    config.devtool = 'source-map';
+  if (argv.mode === "production") {
+    config.devtool = "source-map";
+    config.plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+      }),
+    );
   }
+
+  console.log("Webpack config\n");
+
+  jsonBeautify(config);
 
   return config;
 };

@@ -12,6 +12,11 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "react-hot-loader/babel"
+      ]
     ]
   },
   "husky": {
@@ -36,13 +41,22 @@
     "build": "npm run clean-build && webpack --mode production",
     "build-serve": "npm run build && serve"
   },
-  "keywords": ["react-boilerplate","reactjs-boilerplate","reactjs","webpack","babel"],
+  "keywords": [
+    "react-boilerplate",
+    "reactjs-boilerplate",
+    "reactjs",
+    "webpack",
+    "babel"
+  ],
   "author": "Nikhil Kumaran S",
   "license": "ISC",
   "dependencies": {
+    "@hot-loader/react-dom": "^16.9.0",
+    "beautify-json": "^1.0.1",
     "fs-extra": "^8.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-hot-loader": "^4.12.14",
     "react-router-dom": "^5.0.1"
   },
   "devDependencies": {

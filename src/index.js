@@ -1,9 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AppRouter from "./routes"
-
-const App = () => {
-  return <AppRouter/>;
-};
+import App from "./App";
 
 ReactDOM.render(<App />, document.querySelector("#root"));
