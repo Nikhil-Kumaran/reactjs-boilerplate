@@ -16,6 +16,17 @@
     "plugins": [
       [
         "react-hot-loader/babel"
+      ],
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "libraryDirectory": "es",
+          "style": "css"
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties"
       ]
     ]
   },
@@ -26,8 +37,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
-      "eslint",
       "pretty-quick --staged",
+      "eslint",
       "git add"
     ]
   },
@@ -51,7 +62,10 @@
   "author": "Nikhil Kumaran S",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/dark-theme": "^1.0.3",
     "@hot-loader/react-dom": "^16.9.0",
+    "@svgr/webpack": "^4.3.3",
+    "antd": "^3.23.5",
     "beautify-json": "^1.0.1",
     "fs-extra": "^8.1.0",
     "react": "^16.9.0",
@@ -61,10 +75,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.12.2",
     "css-loader": "^3.2.0",
     "eslint": "^6.2.2",
     "eslint-config-google": "^0.13.0",

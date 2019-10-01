@@ -4,6 +4,7 @@ import AppRouter from "./routes";
 
 const App = () => {
   return <AppRouter />;
+  // return <MainLayout />
 };
 
 export default hot(module)(App);

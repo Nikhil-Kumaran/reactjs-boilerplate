@@ -1,7 +1,7 @@
 import React from "react";
 
 const Me = () => {
-  return <div>About Me page</div>;
+  return <h3 style={{ padding: 24 }}>About Me page</h3>;
 };
 
 export default Me;

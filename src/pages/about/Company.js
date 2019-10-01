@@ -1,7 +1,7 @@
 import React from "react";
 
 const Company = () => {
-  return <div>About Company page</div>;
+  return <h3 style={{ padding: 24 }}>About Company page</h3>;
 };
 
 export default Company;
