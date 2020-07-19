@@ -8,6 +8,24 @@
     "url": "https://github.com/Nikhil-Kumaran/reactjs-boilerplate/"
   },
   "homepage": "https://reactjs-boilerplate.netlify.com/",
+  "keywords": [
+    "react-boilerplate",
+    "reactjs-boilerplate",
+    "create-react-app",
+    "CRA",
+    "reactjs-setup",
+    "reactjs",
+    "webpack",
+    "babel"
+  ],
+  "author": "Nikhil Kumaran S",
+  "license": "ISC",
+  "engines": {
+    "node": ">=10.16.0"
+  },
+  "bin": {
+    "reactjs-boilerplate": "./bin/start.js"
+  },
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -42,64 +60,57 @@
       "git add"
     ]
   },
-  "bin": {
-    "reactjs-boilerplate": "./bin/start.js"
-  },
-  "preferGlobal": true,
   "scripts": {
-    "start": "webpack-dev-server --port 8080 --open --hot --mode development --display-error-details",
-    "clean-build": "rm -rf build",
-    "build": "npm run clean-build && webpack --mode production",
-    "build-serve": "npm run build && serve"
+    "start": "webpack-dev-server --port 8080 --mode=development --display-error-details",
+    "clean-build": "shx rm -rf build",
+    "build": "yarn clean-build && webpack -p --mode=production",
+    "build-serve": "yarn build && serve"
   },
-  "keywords": [
-    "react-boilerplate",
-    "reactjs-boilerplate",
-    "reactjs",
-    "webpack",
-    "babel"
-  ],
-  "author": "Nikhil Kumaran S",
-  "license": "ISC",
   "dependencies": {
-    "@ant-design/dark-theme": "^1.0.3",
-    "@hot-loader/react-dom": "^16.9.0",
-    "@svgr/webpack": "^4.3.3",
-    "antd": "^3.23.5",
+    "@ant-design/dark-theme": "^2.0.2",
+    "@ant-design/icons": "^4.2.1",
+    "@hot-loader/react-dom": "^16.13.0",
+    "antd": "^4.4.2",
     "beautify-json": "^1.0.1",
-    "fs-extra": "^8.1.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-hot-loader": "^4.12.14",
-    "react-router-dom": "^5.0.1"
+    "fs-extra": "^9.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.12.21",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.0.6",
-    "babel-plugin-import": "^1.12.2",
-    "css-loader": "^3.2.0",
-    "eslint": "^6.2.2",
-    "eslint-config-google": "^0.13.0",
-    "eslint-config-prettier": "^6.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-react": "^7.14.3",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "husky": "^3.0.4",
-    "less": "^3.10.1",
-    "less-loader": "^5.0.0",
-    "lint-staged": "^9.2.5",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "serve": "^11.1.0",
-    "style-loader": "^1.0.0",
-    "webpack": "^4.39.2",
-    "webpack-bundle-analyzer": "^3.5.0",
-    "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0"
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@svgr/webpack": "^5.4.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-import": "^1.13.0",
+    "compression-webpack-plugin": "^4.0.0",
+    "css-loader": "^3.6.0",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.7",
+    "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.2.5",
+    "less": "^3.11.3",
+    "less-loader": "^6.2.0",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "serve": "^11.3.2",
+    "shx": "^0.3.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }

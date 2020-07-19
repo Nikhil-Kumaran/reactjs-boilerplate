@@ -1,16 +1,23 @@
-import React from "react";
-import { Layout } from "antd";
-import { PageHeader } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Layout, PageHeader } from 'antd';
+
+import './PageLayout.less';
 
 const { Content } = Layout;
 
-const PageLayout = props => {
+const PageLayout = ({ title, children }) => {
   return (
     <>
-      <PageHeader title={props.title && props.title} />
-      <Content style={{ padding: 24, background: "#fff" }}>{props.children}</Content>
+      <PageHeader title={title} />
+      <Content className="page-content">{children}</Content>
     </>
   );
+};
+
+PageLayout.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default PageLayout;

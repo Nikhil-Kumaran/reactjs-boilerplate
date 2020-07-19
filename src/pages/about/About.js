@@ -1,22 +1,10 @@
-import React from "react";
-import { Link, Route } from "react-router-dom";
-import Me from "./Me";
-import Company from "./Company";
-import PageLayout from "../../layout/PageLayout";
-import { Button } from "antd";
+import React from 'react';
+import PageLayout from '../../layout/PageLayout';
 
-const About = props => {
+const About = () => {
   return (
-    <PageLayout title={"About us"}>
-      <Button style={{ width: "50%" }}>
-        <Link to={`${props.match.url}/me`}>About Me</Link>
-      </Button>
-      <Button style={{ width: "50%" }}>
-        <Link to={`${props.match.url}/company`}>About Company</Link>
-      </Button>
-
-      <Route path={`${props.match.url}/me`} component={Me} />
-      <Route path={`${props.match.url}/company`} component={Company} />
+    <PageLayout title="About">
+      <h3>About page</h3>
     </PageLayout>
   );
 };

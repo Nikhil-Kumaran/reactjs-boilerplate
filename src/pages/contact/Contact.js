@@ -1,11 +1,10 @@
-import React from "react";
-import PageLayout from "../../layout/PageLayout";
-import ContactSVG from "../../assets/contactus.svg";
+import React from 'react';
+import PageLayout from '../../layout/PageLayout';
 
-const Contact = props => {
+const Contact = () => {
   return (
-    <PageLayout title={"Contact us"}>
-      <ContactSVG />
+    <PageLayout title="Contact">
+      <h3>Contact page</h3>
     </PageLayout>
   );
 };

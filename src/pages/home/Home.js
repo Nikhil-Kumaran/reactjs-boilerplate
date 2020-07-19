@@ -1,14 +1,20 @@
-import React from "react";
-import "./Home.css";
-import "./Home.less";
-import PageLayout from "../../layout/PageLayout";
+import React from 'react';
+import PropTypes from 'prop-types';
+import PageLayout from '../../layout/PageLayout';
 
-const Home = props => {
+const Home = ({ location: { pathname } }) => {
+  if (pathname !== '/') {
+    return null;
+  }
   return (
-    <PageLayout title={"Home"}>
-      <div className="home homeless">{props.text}</div>
+    <PageLayout title="Home">
+      <h3>Home page</h3>
     </PageLayout>
   );
+};
+
+Home.propTypes = {
+  location: PropTypes.object.isRequired,
 };
 
 export default Home;

@@ -1,18 +1,36 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import MainLayout from "./layout/MainLayout";
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import MainLayout from './layout/MainLayout';
+import RouteWithSubRoutes from './RouteWithSubRoutes';
 
-import Home from "pages/home/Home";
-import About from "pages/about/About";
-import Contact from "pages/contact/Contact";
+const Home = lazy(() => import('pages/home/Home'));
+const About = lazy(() => import('pages/about/About'));
+const Contact = lazy(() => import('pages/contact/Contact'));
+
+const routes = [
+  {
+    path: '/',
+    component: Home,
+  },
+  {
+    path: '/about',
+    component: About,
+  },
+  {
+    path: '/contact',
+    component: Contact,
+  },
+];
 
 const AppRouter = () => {
   return (
     <Router>
       <MainLayout>
-        <Route path="/" exact render={routeprops => <Home text="Welcome home" {...routeprops} />} />
-        <Route path="/about" render={routeprops => <About {...routeprops} />} />
-        <Route path="/contact" render={routeprops => <Contact {...routeprops} />} />
+        <Suspense fallback={<div className="lazy-loading">Loading...</div>}>
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
+        </Suspense>
       </MainLayout>
     </Router>
   );

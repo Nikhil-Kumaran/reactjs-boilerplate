@@ -1,23 +1,20 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const path = require("path");
-const { jsonBeautify } = require("beautify-json");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const path = require('path');
+const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
+const { jsonBeautify } = require('beautify-json');
 
 let config = {
-  entry: ["./src/index.js"],
   output: {
-    path: path.resolve(__dirname, "build"),
-    publicPath: "/",
-    filename: "bundle.js",
-  },
-  devServer: {
-    contentBase: "./build",
-    historyApiFallback: true, //For react router
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/',
+    filename: 'bundle.js',
   },
   resolve: {
-    modules: [path.join(__dirname, "src"), "node_modules"],
+    modules: [path.join(__dirname, 'src'), 'node_modules'],
     alias: {
-      react: path.join(__dirname, "node_modules", "react"),
+      react: path.join(__dirname, 'node_modules', 'react'),
     },
   },
   module: {
@@ -26,25 +23,17 @@ let config = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader",
-          },
-        ],
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
         ],
       },
@@ -52,45 +41,89 @@ let config = {
         test: /\.less$/,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
           },
         ],
       },
       {
         test: /\.svg$/,
-        use: ["@svgr/webpack"],
+        use: ['@svgr/webpack'],
       },
     ],
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./index.html",
+      template: './index.html',
+      favicon: './favicon.png',
     }),
   ],
 };
 
 module.exports = (env, argv) => {
-  if (argv.mode === "development") {
-    config.devtool = "inline-source-map";
-    config.resolve.alias["react-dom"] = "@hot-loader/react-dom";
+  config.mode = argv.mode;
+  if (argv.mode === 'development') {
+    config.entry = ['react-hot-loader/patch', './src'];
+    config.devtool = 'inline-source-map';
+    config.resolve.alias['react-dom'] = '@hot-loader/react-dom';
+    config.plugins.push(new webpack.HotModuleReplacementPlugin());
+    config.devServer = {
+      compress: true,
+      hot: true,
+      contentBase: './build',
+      historyApiFallback: true, //For react router
+    };
   }
 
-  if (argv.mode === "production") {
-    config.devtool = "source-map";
+  if (argv.mode === 'production') {
+    config.entry = ['./src'];
+    config.devtool = 'source-map';
+    config.output.filename = '[name].[chunkhash].bundle.js';
+    config.output.chunkFilename = '[name].[chunkhash].bundle.js';
+    config.optimization = {
+      moduleIds: 'hashed',
+      runtimeChunk: {
+        name: 'manifest',
+      },
+      splitChunks: {
+        cacheGroups: {
+          vendors: {
+            test: /node_modules\/(?!antd\/).*/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+          // This can be your own design library.
+          antd: {
+            test: /node_modules\/(antd\/).*/,
+            name: 'antd',
+            chunks: 'all',
+          },
+        },
+      },
+    };
     config.plugins.push(
       new BundleAnalyzerPlugin({
-        analyzerMode: "static",
+        analyzerMode: 'static',
+      }),
+      new CompressionPlugin({
+        test: /\.js(\?.*)?$/i,
       }),
     );
+    config.performance = {
+      hints: 'warning',
+      // Calculates sizes of gziped bundles.
+      assetFilter: function (assetFilename) {
+        return assetFilename.endsWith('.js.gz');
+      },
+    };
   }
 
-  console.log("Webpack config\n");
+  console.log('Webpack config\n');
 
   jsonBeautify(config);
 
