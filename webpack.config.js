@@ -3,6 +3,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const path = require('path');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { jsonBeautify } = require('beautify-json');
 
 let config = {
@@ -113,6 +114,11 @@ module.exports = (env, argv) => {
       new CompressionPlugin({
         test: /\.js(\?.*)?$/i,
       }),
+      new CopyPlugin({
+        patterns: [
+          { from: './_redirects' },
+        ],
+      })
     );
     config.performance = {
       hints: 'warning',
