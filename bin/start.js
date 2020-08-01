@@ -91,6 +91,7 @@ exec(
       '.prettierrc',
       'index.html',
       'serve.json',
+      'favicon.png'
     ];
 
     for (let i = 0; i < filesToCopy.length; i += 1) {
