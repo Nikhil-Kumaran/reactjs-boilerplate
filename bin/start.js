@@ -11,46 +11,13 @@ const scripts = `"start": "webpack-dev-server --port 8080 --open --mode=developm
     "build": "npm run clean-build && webpack --mode=production",
     "build-serve": "npm run build && serve"`;
 
-const babel = `"babel": {
-  "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react"
-  ],
-  "plugins": [
-    [
-      "react-hot-loader/babel"
-    ],
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "libraryDirectory": "es",
-        "style": "css"
-      }
-    ],
-    [
-      "@babel/plugin-proposal-class-properties"
-    ]
-  ]
-}`;
+const babel = `"babel": ${JSON.stringify(packageJson.babel)}`;
 
-const husky = `"husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  }`;
+const husky = `"husky": ${JSON.stringify(packageJson.husky)}`;
 
-const lint_staged = `"lint-staged": {
-    "src/**/*.{js,jsx}": [
-      "pretty-quick --staged",
-      "eslint",
-      "git add"
-    ]
-  }`;
+const lint_staged = `"lint-staged": ${JSON.stringify(packageJson['lint-staged'])}`;
 
-const node_engine = `"engines": {
-    "node": ">=10.16.0"
-  }`;
+const node_engine = `"node_engine": ${JSON.stringify(packageJson.engines)}`;
 
 const getDeps = (deps) =>
   Object.entries(deps)
